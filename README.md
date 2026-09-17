@@ -1,6 +1,6 @@
 # Morning Briefing — Setup Checklist
 
-A private news podcast that makes itself every morning at 5:30 AM Pakistan time and appears in Apple Podcasts on your iPhone. Expected cost: under $1 a month.
+A private news podcast that makes itself whenever you ask and appears in Apple Podcasts on your iPhone. Expected cost: under $1 a month.
 
 **Time needed:** about 60 minutes, once.
 **Use a laptop or desktop** for setup. The iPhone is only needed at the end.
@@ -12,7 +12,7 @@ A private news podcast that makes itself every morning at 5:30 AM Pakistan time 
 
 ## Part A — Put the code on GitHub (15 min)
 
-GitHub stores the code, runs it every morning for free, and hosts the podcast files.
+GitHub stores the code, runs it for free whenever you trigger it, and hosts the podcast files.
 
 - [ ] **A1. Create a GitHub account.** Go to https://github.com/signup and follow the steps. Pick your username carefully; it becomes part of your podcast link (`https://USERNAME.github.io/morning-briefing/`).
 - [ ] **A2. Create the repository** (a project folder on GitHub).
@@ -26,12 +26,12 @@ GitHub stores the code, runs it every morning for free, and hosts the podcast fi
   2. On the new repository page, click the link **uploading an existing file**.
   3. Open the unzipped `morning-briefing` folder, select **everything inside it**, and drag it onto the upload area. Drag the contents, not the folder itself.
   4. Click **Commit changes**.
-- [ ] **A4. Check the scheduler file arrived.** In the repository you should see a `.github` folder. Mac and some Windows setups hide folders starting with a dot, so it often doesn't upload. If it's missing:
+- [ ] **A4. Check the workflow file arrived.** In the repository you should see a `.github` folder. Mac and some Windows setups hide folders starting with a dot, so it often doesn't upload. If it's missing:
   1. Click **Add file → Create new file**.
   2. In the name box, type exactly `.github/workflows/daily-briefing.yml`. The slashes create the folders automatically.
   3. Open `setup/daily-briefing.yml` from the unzipped folder in any text editor, copy everything, and paste it into the big box.
   4. Click **Commit changes**.
-- [ ] **A5. Allow the scheduler to save files.** Go to **Settings → Actions → General**. Under **Workflow permissions**, choose **Read and write permissions**, then click **Save**.
+- [ ] **A5. Allow the workflow to save files.** Go to **Settings → Actions → General**. Under **Workflow permissions**, choose **Read and write permissions**, then click **Save**.
 
 ## Part B — Get your two Google keys (20 min)
 
@@ -89,7 +89,7 @@ Secrets are stored encrypted and never appear in your code or to visitors.
   2. Choose your car's Bluetooth device, set it to **Is Connected**, and select **Run Immediately**.
   3. Add the action **Play Podcast** and pick **Morning Briefing**. If that action isn't offered, use **Open App → Podcasts** instead.
 
-**Done.** From tomorrow, a new episode appears automatically each morning.
+**Done.** To make an episode, go to **Actions → Daily briefing → Run workflow → Run workflow**.
 
 ---
 
@@ -106,9 +106,7 @@ To change settings, edit **`config.yaml`** on GitHub: click the file, click the 
 | Change a section's focus | The `focus` text for that section |
 | Keep more past episodes | `keep_episodes` |
 
-**To change the time it runs**, edit `.github/workflows/daily-briefing.yml` and change the `cron` line. GitHub uses UTC, which is Pakistan time minus 5 hours. For example, 06:15 PKT becomes `"15 1 * * *"`. GitHub sometimes starts scheduled runs 10–30 minutes late, so keep at least an hour between the run time and when you leave.
-
-**To make an extra episode right now**, go to **Actions → Daily briefing → Run workflow**. A second run on the same day replaces that day's episode.
+**To make a new episode**, go to **Actions → Daily briefing → Run workflow → Run workflow**. There's no automatic schedule in the current setup — every episode is made this way. Running it again on the same day replaces that day's episode rather than creating a duplicate.
 
 ## Troubleshooting
 
@@ -132,8 +130,8 @@ GitHub emails you automatically whenever a run fails. Open the failed run and re
 |---|---|
 | `briefing.py` | The program: collects news, writes the script, makes the audio, updates the feed |
 | `config.yaml` | All your settings |
-| `.github/workflows/daily-briefing.yml` | The daily schedule |
-| `setup/daily-briefing.yml` | A visible copy of the schedule file, for step A4 |
+| `.github/workflows/daily-briefing.yml` | The manual-run workflow (Actions → Daily briefing → Run workflow) |
+| `setup/daily-briefing.yml` | A visible copy of the workflow file, for step A4 |
 | `requirements.txt` | Software libraries the program uses |
 | `assets/cover.png` | The podcast cover image |
 

@@ -1,12 +1,7 @@
 name: Daily briefing
 
 on:
-  schedule:
-    # 00:30 UTC = 05:30 Pakistan time, every day.
-    # Pakistan is UTC+5, so subtract 5 hours from the time you want.
-    # Format: "minute hour * * *"   e.g. 06:15 PKT -> "15 1 * * *"
-    - cron: "30 0 * * *"
-  workflow_dispatch: {}   # adds the "Run workflow" button
+  workflow_dispatch: {}   # Actions -> Daily briefing -> Run workflow
 
 permissions:
   contents: write
@@ -63,21 +58,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
           git commit -q -m "Briefing $(date -u +%Y-%m-%d)"
-          # Replaces the website branch each day so old audio never piles up.
+          # Replaces the website branch each run so old audio never piles up.
           git push -q -f "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages
-
-      - name: Keep the daily schedule switched on
-        # GitHub pauses schedules after 60 days with no activity on the repository.
-        run: |
-          last=$(git log -1 --format=%ct)
-          age_days=$(( ($(date +%s) - last) / 86400 ))
-          if [ "$age_days" -ge 30 ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            date -u +%Y-%m-%dT%H:%M:%SZ > .last-keepalive
-            git add .last-keepalive
-            git commit -q -m "Keep the daily schedule active"
-            git pull -q --rebase && git push -q
-          else
-            echo "Recent activity ${age_days} days ago; nothing to do."
-          fi
