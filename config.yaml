@@ -1,0 +1,133 @@
+# ============================================================================
+#  MORNING BRIEFING SETTINGS
+#  This is the only file you need to edit to change the show, length, voice,
+#  topics or news sources. Edit it on GitHub with the pencil icon, then
+#  "Commit changes". Changes apply from the next run.
+#
+#  Tip: this repository is public, so don't put anything private in this file.
+#  Your API keys are NOT stored here; they live in GitHub Secrets.
+# ============================================================================
+
+show:
+  title: "Morning Briefing"
+  description: "A private daily briefing on Pakistan, the US, world affairs, technology and the economy."
+  author: "Morning Briefing"
+  language: "en"
+  timezone: "Asia/Karachi"
+  keep_episodes: 7            # how many past episodes stay in the feed
+  listener: >
+    A listener based in Lahore, Pakistan, who follows technology, geopolitics and
+    macroeconomics, with a focus on the United States, international affairs and
+    Pakistan. Listens during a short morning drive.
+
+briefing:
+  target_minutes: 7.5         # length of each episode
+  words_per_minute: 150
+
+ai:
+  # Models that write the script, tried in order. If one fails or is retired
+  # by Google, the next one is used automatically.
+  script_models:
+    - gemini-3.5-flash-lite
+    - gemini-3.1-flash-lite
+    - gemini-3-flash-preview
+  temperature: 0.3            # lower = more factual and consistent
+
+voice:
+  engines: [google_cloud, gemini]   # main voice first, backup second
+  google_cloud:
+    # Other voices to try: en-US-Chirp3-HD-Kore, en-US-Chirp3-HD-Puck,
+    # en-GB-Chirp3-HD-Charon (British accent), en-IN-Chirp3-HD-Charon (Indian English)
+    name: en-US-Chirp3-HD-Charon
+    language_code: en-US
+    # speaking_rate: 1.05     # remove the # to speak slightly faster
+  gemini:
+    model: gemini-3.1-flash-tts-preview
+    voice: Charon
+    style: "Read the following news briefing aloud in a calm, clear, professional newsreader voice:"
+  mp3_bitrate_kbps: 48
+
+news:
+  max_age_hours: 26           # ignore stories older than this
+  per_feed: 8                 # at most this many stories from each feed
+  summary_chars: 350
+  min_articles: 15            # stop (and email you) if fewer stories than this are found
+
+# ----------------------------------------------------------------------------
+#  SECTIONS AND SOURCES
+#  Each feed uses either:
+#    url: a direct RSS feed address, or
+#    google_news: a Google News search (useful for outlets without a feed).
+#  If a feed stops working, the briefing continues without it and the run
+#  report on GitHub marks it with a warning.
+# ----------------------------------------------------------------------------
+sections:
+  - name: Pakistan
+    focus: >
+      Politics and governance, the economy, IMF and State Bank policy, energy,
+      security, and the previous day's Pakistan Stock Exchange (KSE-100) close.
+    feeds:
+      - name: Dawn
+        url: https://www.dawn.com/feeds/home
+      - name: Dawn Business
+        url: https://www.dawn.com/feeds/business
+      - name: Business Recorder
+        google_news: "site:brecorder.com"
+      - name: Express Tribune
+        google_news: "site:tribune.com.pk"
+      - name: Profit (Pakistan Today)
+        url: https://profit.pakistantoday.com.pk/feed/
+      - name: PSX market close
+        google_news: "PSX KSE-100 index"
+
+  - name: United States and the world
+    focus: >
+      Major US political and policy news, wars and conflicts, diplomacy,
+      sanctions and trade, and developments that affect South Asia and the Gulf.
+    feeds:
+      - name: BBC World
+        url: https://feeds.bbci.co.uk/news/world/rss.xml
+      - name: BBC US and Canada
+        url: https://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml
+      - name: Al Jazeera
+        url: https://www.aljazeera.com/xml/rss/all.xml
+      - name: NPR News
+        url: https://feeds.npr.org/1001/rss.xml
+      - name: AP
+        google_news: "site:apnews.com"
+      - name: Reuters World
+        google_news: "site:reuters.com world"
+
+  - name: Technology
+    focus: >
+      AI, big tech, semiconductors, cybersecurity, tech regulation, and major
+      startup or funding news.
+    feeds:
+      - name: The Verge
+        url: https://www.theverge.com/rss/index.xml
+      - name: Ars Technica
+        url: https://feeds.arstechnica.com/arstechnica/index
+      - name: TechCrunch
+        url: https://techcrunch.com/feed/
+      - name: Techmeme
+        url: https://www.techmeme.com/feed.xml
+      - name: BBC Technology
+        url: https://feeds.bbci.co.uk/news/technology/rss.xml
+
+  - name: Macro and markets
+    focus: >
+      Central banks and interest rates, inflation and jobs data, the previous
+      US stock market close, oil, gold, the US dollar and the Pakistani rupee.
+    feeds:
+      - name: CNBC Economy
+        url: https://www.cnbc.com/id/20910258/device/rss/rss.html
+      - name: BBC Business
+        url: https://feeds.bbci.co.uk/news/business/rss.xml
+      - name: US market close
+        google_news: "stock market today Dow S&P 500 Nasdaq"
+      - name: Oil, gold and dollar
+        google_news: "oil prices OR gold prices OR dollar index"
+      - name: Rupee
+        google_news: "rupee dollar interbank State Bank of Pakistan"
+      - name: Reuters Markets
+        google_news: "site:reuters.com markets"
