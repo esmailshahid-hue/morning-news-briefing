@@ -58,6 +58,10 @@ news:
 #  Each feed uses either:
 #    url: a direct RSS feed address, or
 #    google_news: a Google News search (useful for outlets without a feed).
+#  Each feed can also have:
+#    kind: news       factual/news reporting (this is the default if left out)
+#    kind: analysis    commentary/opinion/analysis; the script writer is told
+#                       to clearly attribute anything it uses from these
 #  If a feed stops working, the briefing continues without it and the run
 #  report on GitHub marks it with a warning.
 # ----------------------------------------------------------------------------
@@ -75,10 +79,14 @@ sections:
         google_news: "site:brecorder.com"
       - name: Express Tribune
         google_news: "site:tribune.com.pk"
-      - name: Profit (Pakistan Today)
-        url: https://profit.pakistantoday.com.pk/feed/
       - name: PSX market close
         google_news: "PSX KSE-100 index"
+      - name: Nukta Pakistan
+        google_news: "site:nukta.com/pakistan"
+      - name: Nukta Business
+        google_news: "site:nukta.com/business"
+      - name: Mettis Global
+        google_news: "site:mettisglobal.news"
 
   - name: United States and the world
     focus: >
@@ -97,6 +105,10 @@ sections:
         google_news: "site:apnews.com"
       - name: Reuters World
         google_news: "site:reuters.com world"
+      - name: New York Times World
+        url: https://rss.nytimes.com/services/xml/rss/nyt/World.xml
+      - name: CNBC Top News
+        url: https://www.cnbc.com/id/100003114/device/rss/rss.html
 
   - name: Technology
     focus: >
@@ -113,6 +125,13 @@ sections:
         url: https://www.techmeme.com/feed.xml
       - name: BBC Technology
         url: https://feeds.bbci.co.uk/news/technology/rss.xml
+      - name: Bloomberg Technology
+        url: https://feeds.bloomberg.com/technology/news.rss
+      - name: New York Times Technology
+        url: https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml
+      - name: Economist Science & Technology
+        url: https://www.economist.com/science-and-technology/rss.xml
+        kind: analysis
 
   - name: Macro and markets
     focus: >
@@ -131,3 +150,15 @@ sections:
         google_news: "rupee dollar interbank State Bank of Pakistan"
       - name: Reuters Markets
         google_news: "site:reuters.com markets"
+      - name: Bloomberg Markets
+        url: https://feeds.bloomberg.com/markets/news.rss
+      - name: Bloomberg Economics
+        url: https://feeds.bloomberg.com/economics/news.rss
+      - name: Wall Street Journal Markets
+        url: https://feeds.content.dowjones.io/public/rss/RSSMarketsMain
+      - name: Economist Finance & Economics
+        url: https://www.economist.com/finance-and-economics/rss.xml
+        kind: analysis
+      - name: Prof G Markets
+        url: https://feeds.megaphone.fm/profgmarkets
+        kind: analysis

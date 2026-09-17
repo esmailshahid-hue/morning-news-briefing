@@ -176,6 +176,7 @@ def fetch_feeds(cfg: dict, now: datetime) -> tuple[list[dict], list[tuple]]:
                     {
                         "section": section["name"],
                         "source": source,
+                        "kind": feed.get("kind", "news"),
                         "title": title,
                         "summary": summary,
                         "url": entry.get("link", ""),
@@ -193,8 +194,15 @@ def _normalise(title: str) -> str:
 
 def dedupe(articles: list[dict], section_order: list[str]) -> list[dict]:
     oldest = datetime.min.replace(tzinfo=UTC)
-    # Direct feeds before Google News copies, newest first, so the best copy survives.
-    articles.sort(key=lambda a: (a["summary"] == "", -(a["published"] or oldest).timestamp()))
+    # Direct feeds before Google News copies, then news before analysis, newest first,
+    # so the best copy survives.
+    articles.sort(
+        key=lambda a: (
+            a["summary"] == "",
+            a["kind"] != "news",
+            -(a["published"] or oldest).timestamp(),
+        )
+    )
     kept: list[dict] = []
     seen: list[str] = []
     for art in articles:
@@ -224,6 +232,20 @@ the article text you were given. Otherwise describe the direction only if the ar
 rather than guess.
 - Attribute naturally, for example "according to Dawn" or "Business Recorder reports".
 - Stay neutral and balanced on political topics. No opinions, no speculation.
+
+ANALYSIS SOURCES: Each article is labelled "news" or "analysis". Factual reporting and \
+analysis/commentary are not interchangeable.
+- When you use a source marked "analysis", attribute its interpretations, opinions, judgments, \
+predictions or causal claims to that source by name. Do not present an analyst's or commentator's \
+view as an independently established fact.
+- When a "news" article and an "analysis" article cover the same development, use the "news" \
+article for the underlying event and use the "analysis" source only for clearly attributed \
+interpretation on top of it.
+- Never let an "analysis" source override or contradict stronger "news" source material without \
+attribution.
+- Acceptable phrasing: "Prof G Markets argues that...", "The Economist notes that...", \
+"According to The Economist's analysis...". Don't repeat attribution for a plain fact already \
+clearly supported by ordinary news sources.
 
 EDITORIAL RULES:
 - Choose by importance, not by recency. Merge stories that several outlets cover.
@@ -288,7 +310,10 @@ def build_prompts(cfg: dict, articles: list[dict], now: datetime) -> tuple[str, 
         lines.append(f"- {sec['name']}: {sec.get('focus', '').strip()}")
     lines += ["", "ARTICLES:"]
     for art in articles:
-        line = f"[{art['id']}] ({art['section']} | {art['source']} | {age_label(art['published'], now)}) {art['title']}"
+        line = (
+            f"[{art['id']}] ({art['section']} | {art['source']} | {art['kind']} | "
+            f"{age_label(art['published'], now)}) {art['title']}"
+        )
         if art["summary"]:
             line += f" -- {art['summary']}"
         lines.append(line)

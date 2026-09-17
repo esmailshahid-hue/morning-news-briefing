@@ -103,10 +103,13 @@ To change settings, edit **`config.yaml`** on GitHub: click the file, click the 
 | Change the voice or accent | `name` under `voice → google_cloud` (options are listed in the file) |
 | Make it speak faster | Remove the `#` before `speaking_rate` |
 | Add or remove a news source | The `feeds` lists under `sections` |
+| Mark a source as commentary/analysis rather than plain news | Add `kind: analysis` under that feed |
 | Change a section's focus | The `focus` text for that section |
 | Keep more past episodes | `keep_episodes` |
 
 **To make a new episode**, go to **Actions → Daily briefing → Run workflow → Run workflow**. There's no automatic schedule in the current setup — every episode is made this way. Running it again on the same day replaces that day's episode rather than creating a duplicate.
+
+**About news sources in `config.yaml`:** each source under `feeds` is either a direct feed (`url:`) or a Google News search (`google_news:`) for outlets without a public feed. A source can also be marked `kind: analysis` if it's commentary or opinion rather than plain reporting (for example, The Economist or a markets podcast); the AI is told to clearly attribute anything it uses from those sources (e.g. "The Economist notes that...") instead of stating it as fact. Leaving `kind` out is the same as `kind: news`.
 
 ## Troubleshooting
 
