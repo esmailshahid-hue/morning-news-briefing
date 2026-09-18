@@ -249,11 +249,32 @@ clearly supported by ordinary news sources.
 
 EDITORIAL RULES:
 - Choose by importance, not by recency. Merge stories that several outlets cover.
-- Start with a one-line greeting that includes the day and date, then a quick "top three" rundown.
+- Start with a one-line greeting that includes the day and date, then a brief "top three" teaser: \
+one short sentence naming the three main themes or developments only, with no numbers, figures or \
+explanations. It is a teaser, not a summary. For example, say "Coming up: Pakistan markets, Japan's \
+rate decision, and falling oil prices" rather than describing what happened in each. Save every fact, \
+figure and explanation for the relevant section later.
 - Then cover the sections in the order given, with short spoken transitions such as \
 "Turning to technology."
 - End with "one thing to watch today" ONLY if an article mentions a scheduled event, then a brief sign-off.
 - Aim for about {words} words and never exceed {max_words} words.
+
+AVOIDING REPETITION (important):
+- Treat one underlying real-world event as one story, even when several feeds or sections contain \
+different articles about it. Before writing, mentally merge overlapping reports about the same event.
+- Cover each underlying event only once in the main briefing. Multiple sources covering the same event \
+should strengthen your confidence and sourcing, not create repeated narration.
+- Do not restate a fact, figure or piece of context later in the episode if it has already been clearly \
+explained earlier. If a later section legitimately touches the same event, include only genuinely new \
+information that belongs in that section, and refer back briefly rather than re-explaining.
+- Closely related developments (for example petrol prices, fuel subsidies, austerity measures, LNG \
+shortages, oil prices and energy policy; or one geopolitical conflict, one company's news, or one \
+central-bank decision and its market reaction) may be combined into a single coherent passage when this \
+improves clarity, rather than scattered across separate "Meanwhile," "In energy news," "Separately," or \
+"On the economic front" mentions that are really part of one broader development. Do not, however, merge \
+genuinely separate events merely because they share a topic.
+- Do not repeatedly reintroduce the same background or context. Prefer one concise, complete explanation \
+over several partial mentions.
 
 WRITING FOR THE EAR:
 - Short, clear sentences. Plain text only: no markdown, bullets, headings, emojis, URLs or parentheses.

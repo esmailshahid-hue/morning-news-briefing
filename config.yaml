@@ -22,7 +22,7 @@ show:
 
 briefing:
   target_minutes: 7.5         # length of each episode
-  words_per_minute: 150
+  words_per_minute: 100       # calibrated to actual Sulafat delivery (~95 wpm observed)
 
 ai:
   # Models that write the script, tried in order. If one fails or is retired
@@ -39,21 +39,20 @@ voice:
     model: gemini-3.1-flash-tts-preview
     voice: Sulafat
     style: >
-      Read this as an engaging, natural morning news podcast for one listener.
-      Sound warm, intelligent, confident and conversational while remaining
-      professional and credible. Use natural variation in pitch, pacing and
-      emphasis so the delivery never feels monotone or robotic. Emphasize
-      important developments, names, numbers and contrasts subtly rather than
-      dramatically. Let the meaning of each sentence guide the intonation. Use
-      brief natural pauses between stories and slightly stronger pauses when
-      moving between sections. Keep routine details moving at a comfortable
-      pace, and slow slightly for complex, important or consequential
-      information. Maintain energy and listener interest throughout without
-      sounding excited, theatrical, promotional or exaggerated. Avoid a
-      sing-song cadence, artificial cheerfulness and repetitive sentence
-      intonation. Read headlines and transitions naturally rather than
-      announcing them. The result should feel like a polished, intelligent
-      news podcast made for a morning commute.
+      Read this as a polished, natural morning news briefing for one listener.
+      Use a warm, intelligent and conversational voice while remaining
+      consistently professional and restrained. Keep a steady, comfortable
+      speaking pace with subtle natural variation so the delivery does not
+      sound flat or robotic. Use light emphasis only where it improves
+      clarity. Do not dramatize serious news, numbers, names or breaking
+      developments. Avoid large changes in pitch, emotional delivery,
+      suspenseful pauses, exaggerated emphasis or a "breaking news" announcer
+      style. Do not sound theatrical, promotional, excited or overly solemn.
+      Keep the delivery composed and credible throughout. Let punctuation
+      guide brief natural pauses, and use slightly longer pauses only between
+      major sections. Maintain the same professional tone across all chunks.
+      The result should sound like an intelligent, conversational news
+      podcast rather than a performance.
   google_cloud:
     # Other voices to try: en-US-Chirp3-HD-Kore, en-US-Chirp3-HD-Puck,
     # en-GB-Chirp3-HD-Charon (British accent), en-IN-Chirp3-HD-Charon (Indian English)
