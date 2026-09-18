@@ -34,17 +34,32 @@ ai:
   temperature: 0.3            # lower = more factual and consistent
 
 voice:
-  engines: [google_cloud, gemini]   # main voice first, backup second
+  engines: [gemini, google_cloud]   # main voice first, backup second
+  gemini:
+    model: gemini-3.1-flash-tts-preview
+    voice: Sulafat
+    style: >
+      Read this as an engaging, natural morning news podcast for one listener.
+      Sound warm, intelligent, confident and conversational while remaining
+      professional and credible. Use natural variation in pitch, pacing and
+      emphasis so the delivery never feels monotone or robotic. Emphasize
+      important developments, names, numbers and contrasts subtly rather than
+      dramatically. Let the meaning of each sentence guide the intonation. Use
+      brief natural pauses between stories and slightly stronger pauses when
+      moving between sections. Keep routine details moving at a comfortable
+      pace, and slow slightly for complex, important or consequential
+      information. Maintain energy and listener interest throughout without
+      sounding excited, theatrical, promotional or exaggerated. Avoid a
+      sing-song cadence, artificial cheerfulness and repetitive sentence
+      intonation. Read headlines and transitions naturally rather than
+      announcing them. The result should feel like a polished, intelligent
+      news podcast made for a morning commute.
   google_cloud:
     # Other voices to try: en-US-Chirp3-HD-Kore, en-US-Chirp3-HD-Puck,
     # en-GB-Chirp3-HD-Charon (British accent), en-IN-Chirp3-HD-Charon (Indian English)
     name: en-US-Chirp3-HD-Charon
     language_code: en-US
     # speaking_rate: 1.05     # remove the # to speak slightly faster
-  gemini:
-    model: gemini-3.1-flash-tts-preview
-    voice: Charon
-    style: "Read the following news briefing aloud in a calm, clear, professional newsreader voice:"
   mp3_bitrate_kbps: 48
 
 news:

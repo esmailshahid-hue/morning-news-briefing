@@ -100,8 +100,9 @@ To change settings, edit **`config.yaml`** on GitHub: click the file, click the 
 | I want to… | Change this |
 |---|---|
 | Make it shorter or longer | `target_minutes` under `briefing` |
-| Change the voice or accent | `name` under `voice → google_cloud` (options are listed in the file) |
-| Make it speak faster | Remove the `#` before `speaking_rate` |
+| Change the speaking style (tone, pacing, energy) | `style` under `voice → gemini` |
+| Change the backup voice or accent | `name` under `voice → google_cloud` (options are listed in the file) |
+| Make the backup voice speak faster | Remove the `#` before `speaking_rate` |
 | Add or remove a news source | The `feeds` lists under `sections` |
 | Mark a source as commentary/analysis rather than plain news | Add `kind: analysis` under that feed |
 | Change a section's focus | The `focus` text for that section |
@@ -120,7 +121,8 @@ GitHub emails you automatically whenever a run fails. Open the failed run and re
 | `GEMINI_API_KEY is missing` | Redo Part C. The secret name must match exactly. |
 | `Every script model failed` with `HTTP 400` or `403` | The Gemini key is wrong or was deleted. Create a new one (B1) and update the secret (C2). |
 | `Every script model failed` with `HTTP 404` | Google has retired those model names. Check the current names at https://ai.google.dev/gemini-api/docs/models and update `script_models` in `config.yaml`. |
-| `Voice engine google_cloud failed … 403` | The Text-to-Speech API isn't enabled (B4), billing isn't linked (B2), or the key is restricted to the wrong API (B5). The briefing still works using the backup voice. |
+| `Voice engine gemini failed …` | The Gemini voice failed (rare). The briefing automatically retries with the Google Cloud backup voice. |
+| `Voice engine google_cloud failed … 403` | The Text-to-Speech API isn't enabled (B4), billing isn't linked (B2), or the key is restricted to the wrong API (B5). This only matters if the primary Gemini voice also failed. |
 | `Every voice engine failed` | Both voices failed. Fix the voice key as above, and check that billing is active. |
 | `Only N stories found` | Several news sources were down. It usually fixes itself the next day; the table shows which feeds failed. |
 | One or two feeds show ⚠️ FAILED | Harmless; the briefing continues without them. If a feed fails every day, remove it or replace it in `config.yaml`. |
